@@ -1,0 +1,8 @@
+interface:
+  display_name: "GOST Reports With Pandoc"
+  short_description: "Generate strict GOST-style student reports"
+  default_prompt: "Use $writing-reports-pandoc-gost to create a GOST-style DOCX/PDF report from my guidelines, cover page, report content, and credentials."
+
+policy:
+  allow_implicit_invocation: true
+

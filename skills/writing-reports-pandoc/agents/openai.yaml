@@ -1,0 +1,8 @@
+interface:
+  display_name: "Writing Reports With Pandoc"
+  short_description: "Generate styled reports from templates"
+  default_prompt: "Use $writing-reports-pandoc to create a DOCX and PDF report from my guidelines, examples, templates, and credentials."
+
+policy:
+  allow_implicit_invocation: true
+

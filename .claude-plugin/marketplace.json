@@ -1,0 +1,20 @@
+{
+  "name": "writing-reports-marketplace",
+  "owner": {
+    "name": "Dmitry"
+  },
+  "description": "Pandoc report-generation plugins for Claude Code.",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "writing-reports-skills",
+      "source": ".",
+      "description": "Pandoc report-generation skills for DOCX, PDF, HTML, Markdown, templates, cover pages, citations, and Russian GOST-style reports.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Dmitry"
+      }
+    }
+  ]
+}
+

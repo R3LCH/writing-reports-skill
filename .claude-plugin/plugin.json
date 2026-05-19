@@ -1,0 +1,22 @@
+{
+  "name": "writing-reports-skills",
+  "description": "Pandoc report-generation skills for DOCX, PDF, HTML, Markdown, templates, cover pages, citations, and Russian GOST-style reports.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Dmitry"
+  },
+  "license": "MIT",
+  "keywords": [
+    "pandoc",
+    "reports",
+    "docx",
+    "pdf",
+    "markdown",
+    "gost"
+  ],
+  "skills": [
+    "./skills/writing-reports-pandoc",
+    "./skills/writing-reports-pandoc-gost"
+  ]
+}
+

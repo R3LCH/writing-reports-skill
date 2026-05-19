@@ -1,0 +1,27 @@
+---
+description: Pandoc report-generation skills for DOCX/PDF/HTML/Markdown, templates, cover pages, citations, and Russian GOST-style reports.
+alwaysApply: true
+---
+
+# Writing Reports Skills
+
+Use these rules when creating, formatting, converting, or updating reports with Pandoc, DOCX, PDF, HTML, Markdown, reference documents, cover pages, citations, templates, or report guidelines.
+
+Prefer the detailed workflows in:
+
+- `skills/writing-reports-pandoc/SKILL.md`
+- `skills/writing-reports-pandoc-gost/SKILL.md`
+
+## Core Rules
+
+- Clarify target outputs and formatting authority before generating final files.
+- Identify each template asset as cover-only, body-style reference, complete example, or reusable source.
+- Never invent credentials or source content.
+- Do not use a cover-only DOCX as Pandoc `--reference-doc`.
+- Preserve semantic Markdown/YAML sources beside generated outputs.
+- Verify output files and formatting before claiming completion.
+
+## GOST Defaults
+
+When preparing Russian GOST-style reports and no stricter rule is provided, use A4, left margin 30 mm, right margin 10 mm, top and bottom margins 20 mm, Times New Roman 14 pt, 1.5 line spacing, first-line indent 1.25 cm, justified body text, and hidden page number on the title page.
+
