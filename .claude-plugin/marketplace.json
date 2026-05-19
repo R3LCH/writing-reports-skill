@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "writing-reports-skills",
-      "source": ".",
+      "source": "./",
       "description": "Pandoc report-generation skills for DOCX, PDF, HTML, Markdown, templates, cover pages, citations, and Russian GOST-style reports.",
       "version": "1.0.0",
       "author": {
@@ -17,4 +17,3 @@
     }
   ]
 }
-
