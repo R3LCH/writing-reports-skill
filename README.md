@@ -1,38 +1,39 @@
-# Writing Reports Skills
+# 📝 Writing Reports Skills
 
-Turn messy report requirements into verified Pandoc outputs your agent can actually ship.
+**Turn rough requirements, templates, and credentials into verified Pandoc reports your AI agent can deliver.**
 
-Writing Reports Skills gives Claude Code, Cursor, Gemini, Codex-style agents, and other skill loaders a repeatable workflow for producing academic, technical, and institutional reports. Instead of asking an agent to improvise DOCX/PDF formatting from memory, this repository teaches it to classify assets, preserve semantic Markdown sources, use Pandoc correctly, and verify the final files before calling the job done.
+Writing Reports Skills gives Claude Code, Cursor, Gemini, Codex-style agents, and other skill loaders a repeatable workflow for producing academic, technical, and institutional reports. It helps the agent classify report assets, preserve semantic Markdown sources, use Pandoc correctly, and verify DOCX/PDF/HTML/Markdown outputs before declaring the work complete.
 
-Languages: English | [Русский](README.ru.md) | [中文](README.zh.md)
+🌐 Languages: English | [Русский](README.ru.md) | [中文](README.zh.md)
 
-## Why Use This
+## 🚀 Why Use It
 
-Most report-generation failures are not caused by Pandoc. They come from unclear template roles, invented credentials, cover pages used as body references, broken page numbering, corrupted text, and agents declaring success without checking the output.
+Most report-generation failures are not Pandoc failures. They come from unclear template roles, invented credentials, cover pages used as body references, broken page numbering, corrupted text, and agents saying "done" without checking the actual file.
 
-These skills are built to prevent that. They make the agent slow down at the right points, ask for missing data, keep the report source reproducible, and inspect generated artifacts before completion.
+These skills give the agent a production-minded report workflow: clarify missing inputs, classify assets, keep a reproducible source, convert with Pandoc, and verify the final artifacts.
 
-## What You Get
+## ✨ What You Get
 
-- **Reliable Pandoc workflow** for DOCX, PDF, HTML, and Markdown reports.
-- **Template discipline** that separates cover-only documents, body-style references, full examples, CSL files, CSS files, bibliographies, and source assets.
-- **Reproducible source files** using semantic Markdown and YAML frontmatter instead of one-off document edits.
-- **Safer credentials handling** with explicit placeholders and no invented student, teacher, client, or institution data.
-- **DOCX cover + body handling** without accidentally using a title page as `--reference-doc`.
-- **Verification gates** for generated files, required sections, citations, page layout, placeholders, text corruption, unexpected blank pages, colors, and code-listing formatting.
-- **GOST-style report support** for Russian student reports, lab reports, course reports, GUAP-style outputs, title pages, page numbering, margins, and source listings.
+- 🧱 **Reliable Pandoc pipeline** for DOCX, PDF, HTML, and Markdown.
+- 🗂️ **Template discipline** for cover-only documents, body-style references, full examples, CSL files, CSS files, bibliographies, and source assets.
+- 🔁 **Reproducible reports** built from semantic Markdown and YAML frontmatter.
+- 🌐 **URL-based guideline intake** for official web pages and PDFs: fetch, extract, preserve source evidence, and apply the rules.
+- 🔒 **Safer credential handling** with explicit placeholders and no invented student, teacher, client, or institution data.
+- 📄 **Correct cover + body workflows** without using a title page as `--reference-doc`.
+- ✅ **Verification gates** for files, required sections, citations, page layout, placeholders, text corruption, blank pages, colors, and code-listing formatting.
+- 📐 **GOST-style support** for Russian student reports, lab reports, course reports, title pages, page numbering, margins, and source listings.
 
-## Best Fit
+## 🎯 Best Fit
 
 Use this repository when you want an AI coding agent to help with:
 
 - lab reports, course reports, student reports, and diploma-style documents;
 - technical reports generated from Markdown;
-- DOCX/PDF deliverables that must follow a reference document or institution rules;
+- DOCX/PDF deliverables that must follow a reference document, uploaded guideline, or official guideline URL;
 - reports with title pages, credentials, tables, figures, citations, and code listings;
 - repeatable report production across Claude Code, Cursor, Gemini, and Codex-like workflows.
 
-## Quick Start
+## ⚡ Quick Start
 
 ### Claude Code Plugin
 
@@ -58,12 +59,12 @@ Copy or merge `GEMINI.md` into a Gemini CLI project, or keep this repository ava
 
 Copy the folders under `skills/` into your tool's skills directory, or reference this repository directly if your tool supports repository-backed skills.
 
-## Included Skills
+## 🧩 Included Skills
 
 - `writing-reports-pandoc` - general report creation, formatting, conversion, and update workflow for Pandoc, DOCX, PDF, HTML, Markdown, reference documents, cover pages, citations, and templates.
-- `writing-reports-pandoc-gost` - strict Russian GOST-style workflow for student reports, lab reports, course reports, GUAP-style DOCX/PDF outputs, title pages, page numbering, margins, and plain source listings.
+- `writing-reports-pandoc-gost` - strict Russian GOST-style workflow for student reports, lab reports, course reports, DOCX/PDF outputs, title pages, page numbering, margins, and plain source listings.
 
-## Example Agent Requests
+## 💬 Example Agent Requests
 
 ```text
 Use writing-reports-pandoc to create a DOCX and PDF report from report.md, reference.docx, and credentials.yaml. Preserve the Markdown source and verify the outputs.
@@ -77,7 +78,23 @@ Use writing-reports-pandoc-gost to prepare a GOST-style lab report with a title 
 Classify the files in this report folder, identify which DOCX is cover-only and which can be used as the body reference, then generate the final report.
 ```
 
-## Repository Layout
+```text
+Use writing-reports-pandoc to fetch the formatting guidelines from this official URL, preserve the extracted rules in report-guidelines.md, then generate DOCX and PDF outputs from report.md.
+```
+
+## 🌐 Guidelines From URLs
+
+You can give the agent an official style-guide URL instead of manually pasting every formatting rule. The skills instruct the agent to:
+
+1. fetch the URL with available web/browser tools;
+2. extract actionable rules such as margins, fonts, spacing, title-page rules, page numbering, citations, required sections, and output formats;
+3. preserve the URL, retrieval date, page/document title, content type, and extracted rules;
+4. ask you to paste or upload the guideline source if the URL is blocked, private, or requires authentication;
+5. apply the extracted rules before using defaults.
+
+This makes URL-based guidelines auditable instead of hidden in the agent's memory.
+
+## 🗃️ Repository Layout
 
 ```text
 .claude-plugin/plugin.json
@@ -96,10 +113,12 @@ skills/
     agents/openai.yaml
 ```
 
-## Examples
+## 🧪 Examples
 
 - `examples/credentials.example.yaml` - placeholder credentials for reports.
 - `examples/first-page.example.md` - title-page source example.
 - `examples/report.example.md` - semantic Markdown report source example.
+
+Use the examples as safe starting inputs: copy them into a private report workspace, replace placeholders with real data there, then ask the agent to build from those files. Keep real credentials out of this repository.
 
 Do not commit real student, teacher, client, institution, or API credentials. Replace placeholders only in private working copies.

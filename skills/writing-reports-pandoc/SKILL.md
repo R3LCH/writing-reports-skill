@@ -1,6 +1,6 @@
 ---
 name: writing-reports-pandoc
-description: Use when creating, formatting, converting, or updating reports with Pandoc, DOCX/PDF/HTML/Markdown, reference documents, cover pages, citations, templates, or user-provided report guidelines.
+description: Use when creating, formatting, converting, or updating reports with Pandoc, DOCX/PDF/HTML/Markdown, reference documents, cover pages, citations, templates, user-provided report guidelines, or formatting rules sourced from URLs.
 ---
 
 # Writing Reports With Pandoc
@@ -18,11 +18,35 @@ Identify:
 - requested outputs: `.docx`, `.pdf`, `.html`, `.md`;
 - report type, language, audience, and required sections;
 - formatting authority: written rules, prior report, `reference.docx`, LaTeX template, CSS, or approved defaults;
+- guideline URLs, if the user wants formatting rules sourced from web pages or PDFs;
 - role of each template asset: cover-only, body-style reference, complete example, or reusable source;
 - credentials: author, organization, course/project/client, reviewer, title, date;
 - citation/bibliography requirements.
 
 Never invent credentials or source content. Ask for missing required data, or use explicit placeholders only when the user accepts them. In fixed-layout areas, keep placeholders short enough not to disturb formatting.
+
+## URL Guideline Intake
+
+When the user provides URL-based style or report guidelines, do not rely on memory or unstated assumptions.
+
+1. Fetch each provided URL with the available web/browser/network tool. Prefer official institution, journal, client, or course pages over mirrors.
+2. If the URL cannot be fetched because network access, authentication, JavaScript rendering, or file download is blocked, ask the user to paste the guideline text or upload the source file. Do not guess.
+3. Preserve evidence in the workspace before generating outputs:
+   - source URL;
+   - retrieval date;
+   - page title or document title when available;
+   - content type (`html`, `pdf`, `docx`, `text`, or unknown);
+   - extracted formatting rules.
+4. Save the extracted rules as a concise local note such as `report-guidelines.md` or include them in the report source frontmatter/notes when the project already has a convention.
+5. Extract only actionable report requirements: paper size, margins, font family/size, line spacing, paragraph indent, alignment, heading rules, title-page rules, page numbering, table/figure rules, listing rules, citation style, required sections, and submission output formats.
+6. If multiple sources conflict, apply this precedence:
+   - explicit user instruction;
+   - provided project/course/institution URL;
+   - uploaded or local template/reference file;
+   - prior report example;
+   - approved defaults.
+   Surface any conflict that changes visible output before generating final files.
+7. Cite the guideline source in the final response with URL and retrieval date. If final report content should not include the citation, keep it in the completion summary rather than the report body.
 
 ## Find And Classify Assets
 
@@ -69,9 +93,10 @@ Do not claim completion until checked:
 - required sections, credentials, citations, figures/tables, and placeholders are present;
 - no text corruption such as `????`;
 - formatting authority was actually applied;
+- URL-sourced rules were fetched or the user supplied an equivalent pasted/uploaded source;
+- extracted guideline source, retrieval date, and applied rules are preserved;
 - template/cover roles were respected;
 - no unexpected blank pages, colors, bold code, or decorative styling;
 - all requested outputs came from the same source unless divergence was explicitly required.
 
 For DOCX, inspect XML with `python-docx` or ZIP/XML checks when visual rendering is unavailable. If a check cannot be performed, state the exact limitation.
-

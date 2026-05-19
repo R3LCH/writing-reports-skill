@@ -1,6 +1,6 @@
 ---
 name: writing-reports-pandoc-gost
-description: Use when preparing Russian GOST-style student reports, lab reports, course reports, or GUAP-style DOCX/PDF outputs with Pandoc, cover pages, page numbering, source listings, and strict formatting checks.
+description: Use when preparing Russian GOST-style student reports, lab reports, course reports, or strict DOCX/PDF outputs with Pandoc, cover pages, page numbering, source listings, formatting guidelines from files or URLs, and strict formatting checks.
 ---
 
 # Writing GOST Reports With Pandoc
@@ -21,6 +21,28 @@ Identify before building:
 - credentials: student, group, teacher, department, course, lab number, title, variant, year.
 
 Never invent credentials. Missing fixed-layout credentials use short red placeholders: `FIO`, `GR.`, `TEACHER`, `ROLE`.
+
+## URL Guideline Intake
+
+When the formatting source is an institution/course URL, treat it as evidence that must be fetched, extracted, and preserved before building the final report.
+
+1. Fetch each provided URL with the available web/browser/network tool. Prefer official institution or course pages over reposts and summaries.
+2. If the URL cannot be fetched because network access, authentication, JavaScript rendering, or file download is blocked, ask the user to paste the guideline text or upload the file. Do not fall back to memory.
+3. Preserve a local guideline note such as `report-guidelines.md` with:
+   - source URL;
+   - retrieval date;
+   - page or document title when available;
+   - content type (`html`, `pdf`, `docx`, `text`, or unknown);
+   - extracted requirements and unresolved ambiguities.
+4. Extract only actionable GOST/report requirements: margins, font, line spacing, paragraph indent, alignment, title-page layout, page numbering, heading rules, table/figure rules, listing rules, required sections, bibliography rules, and output formats.
+5. If URL rules conflict with local files or defaults, apply this precedence:
+   - explicit user instruction;
+   - official institution/course URL;
+   - uploaded/local standard or template;
+   - prior full report example;
+   - approved GOST defaults.
+   Surface visible formatting conflicts before generating final files.
+6. Cite the guideline source in the final response with URL and retrieval date. Do not add the source citation to the report body unless the user asks.
 
 ## GOST Defaults
 
@@ -72,9 +94,10 @@ Do not claim completion until verified. For DOCX, inspect XML if visual renderin
 - no blank page after cover;
 - page-number field exists;
 - margins/font/spacing/indent are present;
+- URL-sourced rules were fetched or the user supplied an equivalent pasted/uploaded source;
+- extracted guideline source, retrieval date, and applied rules are preserved;
 - no colors except approved red placeholders;
 - no bold in listing code, including `*Tok` styles;
 - Markdown source, reference DOCX, Pandoc body, and final DOCX are preserved.
 
 If verification is incomplete, state the exact gap.
-
