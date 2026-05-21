@@ -66,6 +66,18 @@ Classify before use:
 
 Do not use a cover-only file as Pandoc `--reference-doc`.
 
+## Pandoc Is Mandatory
+
+Use Pandoc for report conversion and DOCX/PDF/HTML generation. Do not replace it with ad hoc DOCX generation unless the user explicitly forbids Pandoc.
+
+Before building outputs:
+
+1. Run `pandoc --version`.
+2. If Pandoc is not installed, install it using the available package manager or a portable release, asking for required permissions when needed.
+3. If `pandoc` exists but fails because of a broken shim, missing target executable, bad PATH, or moved install, fix it or locate/download a working executable. Use the working executable by explicit path and report that path.
+4. If a system install cannot be repaired because of permissions, install a portable Pandoc copy inside the workspace, for example `.tools/pandoc-*`, and call it directly.
+5. Do not proceed to final report generation until a real Pandoc command succeeds.
+
 ## Deterministic Routes
 
 Prefer one semantic source per report. Preserve it beside generated outputs.
@@ -74,9 +86,11 @@ Prefer one semantic source per report. Preserve it beside generated outputs.
 - PDF: `pandoc report.md -o report.pdf --pdf-engine=xelatex`
 - HTML: `pandoc report.md -o report.html --standalone --css style.css`
 
-Verify Pandoc with `pandoc --version`. If the shell command points to a broken shim, locate the real executable and report the path used.
-
 For DOCX cover + Pandoc body, generate the body with Pandoc, then prepend/merge the cover. Avoid accidental blank pages by inspecting section/page breaks instead of blindly adding one.
+
+For DOCX tables, ensure Markdown tables become real Word tables (`<w:tbl>`), not preformatted text. If visual rendering shows missing borders or unusable wrapping, fix the DOCX XML: add visible borders to body tables, set sensible column widths, remove first-line paragraph indents inside cells, and keep title-page layout tables borderless when they are used only for alignment.
+
+For a Word table of contents, prefer a real TOC field. If Word will not update fields automatically in the current environment, include a visible TOC result inside the field instead of leaving a placeholder such as "Update field in Word." Put a page break after the TOC when required.
 
 ## Source Discipline
 
