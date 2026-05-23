@@ -88,13 +88,19 @@ Prefer one semantic source per report. Preserve it beside generated outputs.
 
 For DOCX cover + Pandoc body, generate the body with Pandoc, then prepend/merge the cover. Avoid accidental blank pages by inspecting section/page breaks instead of blindly adding one.
 
-For DOCX tables, ensure Markdown tables become real Word tables (`<w:tbl>`), not preformatted text. If visual rendering shows missing borders or unusable wrapping, fix the DOCX XML: add visible borders to body tables, set sensible column widths, remove first-line paragraph indents inside cells, and keep title-page layout tables borderless when they are used only for alignment.
+For DOCX cover + body merges, preserve cover-only files as cover-only. Keep the cover in its own section without visible footer/page number when the style requires it, then start the body in a separate `nextPage` section with the correct starting page number. Do not add an unconditional paragraph page break after the cover; inspect the cover/body section XML so you do not create a blank page.
 
-For a Word table of contents, prefer a real TOC field. If Word will not update fields automatically in the current environment, include a visible TOC result inside the field instead of leaving a placeholder such as "Update field in Word." Put a page break after the TOC when required.
+For DOCX tables, ensure Markdown tables become real Word tables (`<w:tbl>`), not preformatted text. If visual rendering shows missing borders, indentation inside cells, or unusable wrapping, fix the DOCX XML. Add visible borders to body tables, set readable widths when needed, center cell text when requested, remove literal tabs (`w:tab`), tab stops (`w:tabs`), numbering (`w:numPr`), offsetting paragraph styles (`w:pStyle`), first-line/hanging/left/right indents, before/after spacing, and cell margins (`w:tcMar`) inside body table cells when the target format requires no internal padding. Keep title-page layout tables borderless and do not apply body-table cleanup to them.
+
+For table and figure captions, make captions visible paragraphs rather than only image alt text. Respect the target convention: table captions are often above tables and left-aligned; figure captions are often below figures and centered. Center figure paragraphs when required. If Pandoc cannot convert SVG images because `rsvg-convert` is missing, convert or generate diagrams as PNG before DOCX generation.
+
+For a Word table of contents, prefer a real TOC field. If Word will not update fields automatically in the current environment, include a visible TOC result inside the field instead of leaving a placeholder such as "Update field in Word." Use black text, right-aligned tab stops with dot leaders for page numbers when required, and put a page break after the TOC when required.
 
 ## Source Discipline
 
 Use semantic Markdown/YAML where possible: headings, tables, figures, captions, citations, cross-references, and explicit page breaks only where required. Do not silently drop missing content; ask or mark a clear placeholder.
+
+Do not invent data provenance. If report data is user-provided, read the spreadsheet/document instead of copying stale values. If you create expert or educational example data to satisfy an assignment, state that clearly in the report or completion summary and preserve a calculations workbook when useful.
 
 For listings/code when relevant, keep code monospaced and left-aligned unless the target style says otherwise. Disable or remove syntax colors/bold when the report requires plain listings (`--no-highlight` or edit Pandoc token styles).
 
@@ -111,6 +117,11 @@ Do not claim completion until checked:
 - extracted guideline source, retrieval date, and applied rules are preserved;
 - template/cover roles were respected;
 - no unexpected blank pages, colors, bold code, or decorative styling;
+- DOCX cover has no unintended footer/page number, body numbering starts where required, and no accidental blank page appears after the cover;
+- TOC is a real field with visible entries when field updating is unavailable; dot leaders, black text, and post-TOC page break are present when required;
+- body tables have visible borders and requested alignment, while cover layout tables keep their original geometry and hidden borders;
+- body table cells have no unwanted leading whitespace, tabs, tab stops, list numbering, paragraph/style indents, margins, or spacing when the target format requires none;
+- figure and table captions are visible and aligned as required;
 - all requested outputs came from the same source unless divergence was explicitly required.
 
 For DOCX, inspect XML with `python-docx` or ZIP/XML checks when visual rendering is unavailable. If a check cannot be performed, state the exact limitation.

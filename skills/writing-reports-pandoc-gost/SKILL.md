@@ -11,6 +11,8 @@ Build a GOST-style report only after the target format is known. If the standard
 
 Use restrained formatting: black body text, no decorative colors. Red is allowed only for short unknown-data placeholders.
 
+All the formatting principals SHOULD BE TAKEN AS THE SOURCE OF TRUTH, FOLLOWING EVERY SINGLE ONE OF THEM IS MANDATORY.
+
 ## Required Inputs
 
 Identify before building:
@@ -89,19 +91,23 @@ pandoc report.md -o report-body.docx --reference-doc reference.docx
 
 For GOST-style DOCX reports, check these details explicitly:
 
-- First page: title page is counted but must not show a page number or footer. Use `w:titlePg` and, when needed, an empty first-page footer relationship.
+- First page: title page is counted but must not show a page number or footer. Keep the cover as its own section with no `w:footerReference`; start the body section at page 2. Use a section break (`w:type nextPage`) between cover and body, not a blind paragraph page break that can create a blank page.
 - Cover page tables: if a title page uses a table only for alignment, preserve the original table geometry from the cover file but hide its borders. Do not apply body-table width, border, or wrapping fixes to cover layout tables.
-- Table of contents: use a real Word TOC field. If Word field updating is unavailable, include visible TOC result entries inside the field so the user does not see a placeholder. Add a page break after the TOC when the standard/example requires it.
-- Body tables: ensure every report table is a real Word table (`<w:tbl>`), has visible borders, readable column widths, and no first-line paragraph indent inside cells. Reduce table font size only when needed for fit.
+- Table of contents: use a real Word TOC field. If Word field updating is unavailable, include visible TOC result entries inside the field so the user does not see a placeholder. TOC text must be black, entries must use right-aligned tab stops with dot leaders, and the TOC heading should match the report language (for Russian reports: `ОГЛАВЛЕНИЕ`, text must be black). Add a page break after the TOC.
+- Headings: Do not have the numbering convention, unless provided in standard/example. If the user says section titles must have leading numbers, do not rely on Pandoc automatic numbering; use unnumbered heading text and verify no `Heading1`/body heading begins with `^\d+\s+`.
+- Body tables: ensure every report table is a real Word table (`<w:tbl>`), has visible borders, readable column widths, centered cell text when requested, and no inherited paragraph/style offset inside cells. For body table cells, remove literal tabs (`w:tab`), tab stops (`w:tabs`), numbering (`w:numPr`), paragraph style (`w:pStyle`) when it creates offsets, first-line/hanging/left/right indents, cell margins (`w:tcMar`), and before/after spacing unless the standard explicitly requires them. Do not apply these body-cell cleanups to cover layout tables.
+- Table and figure captions: create visible captions as ordinary paragraphs, not only image alt text. GOST-style table captions normally go above tables and are left-aligned; figure captions go below figures and are centered. Center figure paragraphs themselves. If Pandoc cannot convert SVG images because `rsvg-convert` is unavailable, generate or convert diagrams to PNG before building the DOCX.
 - Text color: remove all unapproved text colors and highlights from document XML and styles. Keep body text black.
 - Page breaks: verify there is no accidental blank page after the cover and that required breaks, especially after TOC, are present.
-- Spreadsheet data: when an Excel/ODS file contains source calculations, read data from the spreadsheet instead of copying stale numbers from a prior report. Distinguish expert-entered values from computed values in the report text when the assignment requires explanation.
+- Spreadsheet data: when an Excel/ODS file contains source calculations, read data from the spreadsheet instead of copying stale numbers from a prior report. Distinguish sourced data, expert-entered values, and computed values in the report text when the assignment requires explanation. If you create data yourself to complete a lab, state that it is expert/educational data and optionally preserve it in an `.xlsx` calculations workbook.
 
 ## Listings
 
 For source listings:
 
-- listing headings/captions left-aligned when requested;
+- listing headings for tables are left-aligned;
+- listing headings for code are left-aligned;
+- listing captions should be used for everything else and be centered;
 - code left-aligned;
 - monospaced font;
 - no bold in code;
@@ -124,9 +130,39 @@ Do not claim completion until verified. For DOCX, inspect XML if visual renderin
 - no colors except approved red placeholders;
 - no bold in listing code, including `*Tok` styles;
 - real Word tables exist for report tables, body table borders are visible, and table cell text does not wrap word-by-word because of inherited paragraph indents;
+- body table cell XML has no leading whitespace before text, no `w:tab`, no `w:tabs`, no `w:numPr`, no offsetting `w:pStyle`, zero/absent paragraph indents, zero cell margins when requested, and zero before/after spacing when requested;
 - cover-only layout tables keep their original geometry and have hidden borders when the example uses them for alignment;
-- TOC is a real Word TOC field with visible entries, not only a placeholder; required page break after TOC is present;
+- TOC is a real Word TOC field with visible entries, black text, dot leaders, and not only a placeholder; required page break after TOC is present;
 - title page has no visible footer/page number while subsequent pages have page numbering;
+- figures and figure captions are centered when required; table captions are left-aligned when required;
 - Markdown source, reference DOCX, Pandoc body, and final DOCX are preserved.
 
 If verification is incomplete, state the exact gap.
+
+## Code Snippets
+
+# To remove all the unnecassary spacing before and after the text in table's cells: 
+
+'''
+tcmar = tcpr.find("w:tcMar", NS)
+            if tcmar is None:
+                tcmar = ET.SubElement(tcpr, q("tcMar"))
+            for side in ["top", "left", "bottom", "right"]:
+                node = tcmar.find(f"w:{side}", NS)
+                if node is None:
+                    node = ET.SubElement(tcmar, q(side))
+                node.set(q("w"), "0")
+                node.set(q("type"), "dxa")
+            valign = tcpr.find("w:vAlign", NS)
+'''
+
+and
+
+'''
+ppr = ensure_ppr(p)
+            spacing = ppr.find("w:spacing", NS)
+            if spacing is None:
+                spacing = ET.SubElement(ppr, q("spacing"))
+            spacing.set(q("before"), "0")
+            spacing.set(q("after"), "0")
+'''
