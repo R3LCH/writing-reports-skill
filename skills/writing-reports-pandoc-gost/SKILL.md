@@ -33,6 +33,8 @@ Write the report as an academically appropriate account of completed, understood
 
 Do not address the reader with calls to action such as “сохрани”, “запиши”, “введите”, “нажмите”, “добавьте скриншот”, or “проверьте результат”. Do not turn the execution section into a tutorial or include agent/user correspondence, drafting notes or instructions to finish the work. Describe actual operations and their reasons instead. Source code/commands and clearly identified quotations may retain their original syntax; separately required user manuals remain separate from the report narrative. Practical recommendations must be impersonal, substantiated findings, not orders to the reader.
 
+Do not use the em dash (Unicode U+2014) when writing report text. Use the literal ASCII hyphen `-` (U+002D) instead wherever dash punctuation is needed, including headings, paragraphs, captions, table text, conclusions and generated TOC entries. Prevent automatic typography or export substitutions from reintroducing em dashes. This is a punctuation rule, not a request to change mathematical minus signs or source-code operators; preserve original input files unchanged.
+
 Resolve uncertainty about the assignment, variant, inputs, credentials, actual actions/results, required evidence or formatting before writing the affected final content. First inspect accessible assignment files and authoritative sources; if ambiguity remains, ask the user specific, grouped questions in chat and await answers before the dependent step or final delivery. Continue independent known work. Do not put questions, missing-data notices, guessed alternatives, “вероятно/предположительно” fillers or unresolved placeholders into the finished report.
 
 Keep drafting uncertainty and missing access in chat/private working notes, not report prose. This does not permit concealing measured uncertainty, established methodological limits or observed negative results: those are factual scientific results and must be stated precisely when applicable. Never manufacture certainty or claim unverified work was completed.
@@ -98,6 +100,7 @@ Before delivery, verify the actual output:
 - when Colab is required, the complete notebook is actually executed and saved under the authorized user's account, reopens in Colab with outputs/screenshots/assets and editing access, and its real verified link is present in the report and handoff materials;
 - prose describes completed, understood work without reader-directed imperatives, tutorial instructions, agent commentary or unsupported certainty; practical recommendations are substantiated and impersonal;
 - no corrupted text such as `????`;
+- report text in the source and final DOCX/PDF contains no em dashes (U+2014); dash punctuation uses ASCII `-` (U+002D), including generated fields and captions after updating/exporting;
 - margins, font, spacing, indentation, alignment, section breaks, and page numbering match the authority;
 - no accidental blank page after the cover or TOC;
 - DOCX body tables are native editable tables; LaTeX tables are readable, with visible borders where required, no clipping, and verified continued headers/captions when spanning pages;
