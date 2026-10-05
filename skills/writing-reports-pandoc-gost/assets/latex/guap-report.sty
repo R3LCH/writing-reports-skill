@@ -1,0 +1,59 @@
+% Local overlay; upstream G7-32 files remain unmodified.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{guap-report}[2026/10/04 GUAP report profile for GOST 7.32-2017]
+\RequirePackage{iftex}
+\ifXeTeX\else
+  \PackageError{guap-report}{Use XeLaTeX or Tectonic}{This profile requires an explicit Unicode font.}
+\fi
+\RequirePackage{fontspec}
+\RequirePackage{hyperref}
+\IfFontExistsTF{Times New Roman}{}{
+  \PackageError{guap-report}{Times New Roman is not installed}{Install a licensed font; do not silently substitute another family.}
+}
+\defaultfontfeatures{Ligatures=TeX,Scale=1}
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+\renewfontfamily\cyrillicfont{Times New Roman}
+\renewfontfamily\cyrillicfontsf{Times New Roman}
+\renewfontfamily\cyrillicfonttt{DejaVu Sans Mono}[Scale=MatchLowercase]
+% GOST 7.32-2017 6.1.1: 30/15/20/20 mm; reserve footer within bottom margin.
+\geometry{a4paper,left=30mm,right=15mm,top=20mm,bottom=20mm,
+  includefoot,headheight=0pt,headsep=0pt,footskip=10mm}
+% Explicit 14 pt font and 21 pt baseline: not a multiplier on size14.clo.
+\renewcommand{\normalsize}{\fontsize{14pt}{21pt}\selectfont}
+\linespread{1}
+\normalsize
+\setlength{\parindent}{12.5mm}
+\setlength{\parskip}{0pt}
+\captionsetup{font={normalsize},labelfont=normalfont,textfont=normalfont,
+  labelsep=emdash,singlelinecheck=false}
+\captionsetup[figure]{position=bottom,justification=centering}
+\captionsetup[table]{position=top,justification=raggedright}
+\hypersetup{hidelinks}
+% Upstream titlepage is a NIR-specific form. Never inject its invented fields.
+\newenvironment{GuapTitle}{\clearpage\thispagestyle{empty}\begingroup}
+  {\par\endgroup\clearpage}
+% Use within frontmatter/backmatter, not numbered mainmatter.
+\newcommand{\GuapStructural}[1]{\chapter{#1}}
+% Upstream list hooks can move bibliography labels into the left margin.
+\makeatletter
+\renewenvironment{thebibliography}[1]{%
+  \chapter{\bibname}%
+  \list{\@biblabel{\@arabic\c@biblio}}{%
+    \settowidth\labelwidth{\@biblabel{#1}}%
+    \setlength\labelsep{.5em}%
+    \setlength\leftmargin{\parindent}%
+    \addtolength\leftmargin{\labelwidth}%
+    \addtolength\leftmargin{\labelsep}%
+    \setlength\itemindent{0pt}%
+    \setlength\listparindent{0pt}%
+    \setlength\itemsep{0pt}%
+    \setlength\parsep{0pt}%
+    \usecounter{biblio}%
+    \renewcommand\thebiblio{\@arabic\c@biblio}}%
+  \sloppy\clubpenalty4000\widowpenalty4000\sfcode`\.\@m
+}{\endlist}
+\makeatother
+\AtBeginDocument{\pagestyle{plain}\normalsize}
+\endinput

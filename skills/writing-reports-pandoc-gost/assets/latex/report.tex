@@ -1,0 +1,57 @@
+% Demonstration content only; replace it with sourced assignment content.
+\documentclass[a4paper,14pt,times]{G7-32}
+\usepackage{guap-report}
+\begin{document}
+\begin{GuapTitle}
+\centering
+{[Наименование организации из предоставленного титульного листа]}\par
+{[Кафедра]}\par
+\vfill
+ОТЧЁТ\par
+{[Вид работы, дисциплина и тема]}\par
+\vfill
+{[ФИО студента и группа]}\par
+{[ФИО преподавателя]}\par
+\vfill
+{[Город и год]}\par
+\end{GuapTitle}
+\frontmatter
+\tableofcontents
+\chapter*{Введение}
+\addcontentsline{toc}{chapter}{Введение}
+Это демонстрация вёрстки, а не выполненная учебная работа. Содержание,
+реквизиты и расчёты необходимо взять из задания и исходных материалов.
+\mainmatter
+\chapter{Основная часть}
+\section{Исходные данные}
+Демонстрационные значения приведены в таблице~\ref{tab:demo}.
+Они не являются измерениями или результатами лабораторной работы.
+\begin{table}[htbp]
+\caption{Демонстрационные данные}\label{tab:demo}
+\centering
+\begin{tabular}{|p{90mm}|p{40mm}|}
+\hline
+Показатель & Значение \\
+\hline
+Демонстрационный показатель & 1 \\
+\hline
+\end{tabular}
+\end{table}
+\section{Расчёт}
+Демонстрационная формула:
+\begin{equation}
+y = x + 1.
+\end{equation}
+Рисунки вставляйте через \texttt{includegraphics}, подпись размещайте снизу,
+а ссылку на рисунок приводите в тексте перед изображением.
+\backmatter
+\chapter*{Заключение}
+\addcontentsline{toc}{chapter}{Заключение}
+Демонстрация содержит общую структуру. Состав разделов определяется заданием,
+а не перечнем глав чужого отчёта.
+\begin{thebibliography}{9}
+\bibitem{gost} ГОСТ 7.32–2017. Система стандартов по информации,
+библиотечному и издательскому делу. Отчёт о научно-исследовательской работе.
+Структура и правила оформления. — Текст : непосредственный.
+\end{thebibliography}
+\end{document}

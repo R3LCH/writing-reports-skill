@@ -1,27 +1,9 @@
-# Writing Reports With Pandoc
+# Writing Reports
 
-Use these project instructions when working with report generation, formatting, conversion, or validation tasks.
+Use `skills/writing-reports-pandoc-gost/SKILL.md` for Russian GOST-style student, laboratory, and course reports and strict DOCX/PDF outputs.
 
-The canonical reusable skill files are:
+Pandoc is optional. Choose the route that produces the best verifiable artifact. Clarify output, formatting authority, template roles, credentials, and acceptance checks; never invent credentials or source content; preserve build inputs; verify the final document.
 
-- `skills/writing-reports-pandoc/SKILL.md`
-- `skills/writing-reports-pandoc-gost/SKILL.md`
+For paired GUAP DOCX/PDF, read `skills/writing-reports-pandoc-gost/references/word-master.md`. Prefer a native editable Word master with a separately filled cover and PDF exported after field updating. Use the pinned LaTeX profile when explicitly needed and verify its separate Word export independently. GOST 7.32–2017 margins are 30/15/20/20 mm, not the old 30/10/20/20 profile.
 
-## Activation Guidance
-
-Use the general Pandoc report workflow for DOCX, PDF, HTML, Markdown, templates, citations, reference documents, and cover pages.
-
-Use the GOST workflow for Russian GOST-style student reports, lab reports, course reports, GUAP-style outputs, title-page formatting, page numbering, and strict source-listing rules.
-
-## Required Behavior
-
-- Clarify output format, formatting authority, template role, cover role, credentials, and acceptance checks before generating final files.
-- Never invent credentials. Use explicit placeholders only when accepted by the user or shown in committed examples.
-- Search for provided assets before creating new templates.
-- Preserve semantic Markdown/YAML sources beside generated outputs.
-- Verify generated artifacts before reporting completion.
-
-## Example Inputs
-
-Use `examples/credentials.example.yaml`, `examples/first-page.example.md`, and `examples/report.example.md` as safe placeholder formats. Do not treat them as real credentials.
-
+Use `examples/credentials.example.yaml`, `examples/first-page.example.md`, and `examples/report.example.md` only as placeholder formats.

@@ -1,27 +1,15 @@
 ---
-description: Pandoc report-generation skills for DOCX/PDF/HTML/Markdown, templates, cover pages, citations, and Russian GOST-style reports.
+description: GOST-style report generation and verification
 alwaysApply: true
 ---
 
-# Writing Reports Skills
+# Writing Reports Skill
 
-Use these rules when creating, formatting, converting, or updating reports with Pandoc, DOCX, PDF, HTML, Markdown, reference documents, cover pages, citations, templates, or report guidelines.
+Use `skills/writing-reports-pandoc-gost/SKILL.md` for Russian GOST-style reports and strict DOCX/PDF outputs.
 
-Prefer the detailed workflows in:
-
-- `skills/writing-reports-pandoc/SKILL.md`
-- `skills/writing-reports-pandoc-gost/SKILL.md`
-
-## Core Rules
-
-- Clarify target outputs and formatting authority before generating final files.
-- Identify each template asset as cover-only, body-style reference, complete example, or reusable source.
+- For paired GUAP DOCX/PDF, read `skills/writing-reports-pandoc-gost/references/word-master.md`; prefer editable Word + separately filled cover + PDF export. Retain the pinned LaTeX route when explicitly required. Pandoc/Quarto are optional.
 - Never invent credentials or source content.
-- Do not use a cover-only DOCX as Pandoc `--reference-doc`.
-- Preserve semantic Markdown/YAML sources beside generated outputs.
-- Verify output files and formatting before claiming completion.
+- Classify cover-only, reference, complete-example, and source-data assets.
+- Preserve source/build inputs and verify the output.
 
-## GOST Defaults
-
-When preparing Russian GOST-style reports and no stricter rule is provided, use A4, left margin 30 mm, right margin 10 mm, top and bottom margins 20 mm, Times New Roman 14 pt, 1.5 line spacing, first-line indent 1.25 cm, justified body text, and hidden page number on the title page.
-
+Defaults without stricter rules: A4, 30/15/20/20 mm margins (GOST 7.32–2017), Times New Roman 14 pt, 1.5 spacing, 1.25 cm first-line indent, justified body, hidden title-page number. Render and verify both PDF and DOCX.

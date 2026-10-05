@@ -1,8 +1,8 @@
 # 📝 报告写作技能
 
-**把零散的要求、模板和凭据信息变成可验证、可交付的 Pandoc 报告。**
+**生成经过验证的 PDF 和可编辑 DOCX 报告；GUAP 双格式交付优先使用 Word 主文档，再导出 PDF。**
 
-Writing Reports Skills 为 Claude Code、Cursor、Gemini、Codex 风格 Agent 以及其他技能加载器提供可重复的报告生成流程。它帮助 Agent 识别素材角色，保留语义化 Markdown 源文件，正确调用 Pandoc，并在完成前验证 DOCX/PDF/HTML/Markdown 输出。
+Writing Reports Skill 帮助 Agent 分类素材、保留源文件、应用大学规范并验证最终文档。优先生成可编辑 Word 正文、单独填写封面、更新目录后导出 PDF；明确需要 LaTeX 时仍可使用固定版本的 latex-g7-32。不会从 PDF 反向转换 DOCX。
 
 🌐 语言：[English](README.md) | [Русский](README.ru.md) | 中文
 
@@ -14,7 +14,7 @@ Writing Reports Skills 为 Claude Code、Cursor、Gemini、Codex 风格 Agent �
 
 ## ✨ 你会得到什么
 
-- 🧱 **可靠的 Pandoc pipeline**，支持 DOCX、PDF、HTML 和 Markdown。
+- **可编辑 DOCX 及其最终排版的 PDF**；Pandoc 和 Quarto 是可选工具。参见 [Word 主文档流程与三种路线的实际比较](skills/writing-reports-pandoc-gost/references/word-master.md)。
 - 🗂️ **清晰的模板规则**，区分仅封面文件、正文样式 reference DOCX、完整示例、CSL、CSS、参考文献和源素材。
 - 🔁 **可复现的报告源文件**，使用语义化 Markdown 和 YAML frontmatter。
 - 🌐 **从 URL 获取格式规范**，支持官方网页和 PDF：抓取、提取、保存来源证据并应用规则。
@@ -61,13 +61,11 @@ claude plugin install writing-reports-skills@writing-reports-marketplace
 
 ## 🧩 包含的技能
 
-- `writing-reports-pandoc` - 通用报告创建、格式化、转换和更新流程，支持 Pandoc、DOCX、PDF、HTML、Markdown、reference 文档、封面页、引用和模板。
 - `writing-reports-pandoc-gost` - 严格的俄语 GOST 风格流程，适用于学生报告、实验报告、课程报告、DOCX/PDF、标题页、页码、页边距和纯文本源码清单。
 
 ## 💬 Agent 请求示例
 
 ```text
-Use writing-reports-pandoc to create a DOCX and PDF report from report.md, reference.docx, and credentials.yaml. Preserve the Markdown source and verify the outputs.
 ```
 
 ```text
@@ -79,7 +77,6 @@ Classify the files in this report folder, identify which DOCX is cover-only and 
 ```
 
 ```text
-Use writing-reports-pandoc to fetch the formatting guidelines from this official URL, preserve the extracted rules in report-guidelines.md, then generate DOCX and PDF outputs from report.md.
 ```
 
 ## 🌐 从 URL 获取格式规范
@@ -105,9 +102,6 @@ CURSOR.md
 GEMINI.md
 examples/
 skills/
-  writing-reports-pandoc/
-    SKILL.md
-    agents/openai.yaml
   writing-reports-pandoc-gost/
     SKILL.md
     agents/openai.yaml

@@ -2,3 +2,13 @@
 .DS_Store
 Thumbs.db
 
+# Private assignment instructions and local benchmark/SkillOpt work.
+/promt.md
+/benchmarks/
+/tests/
+/docs/superpowers/specs/*skillopt*
+
+# Generated Python caches.
+__pycache__/
+*.py[cod]
+
